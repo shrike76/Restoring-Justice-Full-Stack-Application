@@ -4,7 +4,7 @@
   "description": "project-cis_4339_project_10 created by GitHub Classroom\r Option C: Restoring Justice\r asd",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/CIS-FA21/project-cis_4339_project_10#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"
