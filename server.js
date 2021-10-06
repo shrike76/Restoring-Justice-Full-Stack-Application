@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/test');
+  await mongoose.connect('mongodb://localhost:27017/Group10');
 }
 
 app.get('/', (req, res) => {
@@ -17,49 +17,60 @@ app.get('/', (req, res) => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
 
-  var IntakeForm = new mongoose.Schema({
-    CaseNum: Number,
-    ClientNum: Number,
-    StartDate: Date,
-    CloseDate: Date,
-  })
-  
-  var IntakeForm = mongoose.model('IntakeForm', IntakeForm)
-  
-  /*const silence = new IntakeForm({ name: 'Silence' });
-console.log(silence.name); // 'Silence'
+app.use(express.json());
 
-IntakeForm.methods.speak = function speak() {
-  const greeting = this.name
-    ? "Meow name is " + this.name
-    : "I don't have a name";
-  console.log(greeting);
-};*/
+//import Intakeform schema
+let IntakeForm = require('./intakeform');
 
-  /*const kittySchema = new mongoose.Schema({
-    name: String
-  });
+//view all
+app.get('/view', (req, res, next) => {
+  //very plain way to get all the data from the collection through the mongoose schema
+  IntakeForm.find((error, data) => {
+      if (error) {
+        //here we are using a call to next() to send an error message back
+        return next(error)
+      } else {
+        res.json(data)
+      }
+    })
+});
+//view by id
 
-  const Kitten = mongoose.model('Kitten', kittySchema);
 
-  const silence = new Kitten({ name: 'Silence' });
-console.log(silence.name); // 'Silence'
-
-kittySchema.methods.speak = function speak() {
-  const greeting = this.name
-    ? "Meow name is " + this.name
-    : "I don't have a name";
-  console.log(greeting);
-};
-
-const fluffy = new Kitten({ name: 'fluffy' });
-fluffy.speak(); // "Meow name is fluffy"
-
-await fluffy.save();
-fluffy.speak();
-
-const kittens = await Kitten.find();
-console.log(kittens);
-
-await Kitten.find({ name: /^fluff/ });
-*/
+//create
+app.post('/create', (req, res, next) => {
+  console.log(req.body);
+    IntakeForm.create(req.body, (error, data) => {
+        if (error) {
+          console.log(error)
+        } else {
+          // res.json(data)
+          res.send(req.body);
+        }
+  })});
+//delete
+  app.delete('/delete/:id', (req, res, next) => {
+    //mongoose will use _id of document
+    IntakeForm.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+          console.log(error)
+        } else {
+          res.status(200).json({
+            msg: data
+          })
+        }
+       });
+});
+//update (needs to be revisionist)
+app.put('/update/:id', (req, res, next) => {
+  IntakeForm.findByIdAndUpdate(req.params.id , {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.send('Student is edited via PUT');
+        console.log('Student successfully updated!', data)
+      }
+    })
+});
