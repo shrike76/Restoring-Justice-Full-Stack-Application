@@ -32,7 +32,7 @@ app.post('/clients', (req, res, next) => {
       return next(error)
     } else {
       // res.json(data)
-      res.send('health insurance is added to the database');
+      res.send('Client Successfully added to Database');
     }
   });
 });

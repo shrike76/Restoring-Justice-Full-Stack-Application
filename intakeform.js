@@ -12,10 +12,7 @@ let IntakeForm = new mongoose.Schema({
       type: Date
     },
     CloseDate: {
-      type: Date,
-      required: function() {
-        CloseDate > StartDate;
-      }
+      type: Date
     },
     //General Information
     LastName: {
