@@ -68,15 +68,15 @@ app.delete('/delete/:id', (req, res, next) => {
 
 
 //UPDATE
-app.put('/update/:id', (req, res, next) => {
+app.put('/clients/:id', (req, res, next) => {
   IntakeForm.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
     if (error) {
       return next(error);
     } else {
-      res.send('Student is edited via PUT');
-      console.log('Student successfully updated!', data)
+      res.send('Client updated');
+      console.log('Client successfully updated!', data)
     }
   })
 });
