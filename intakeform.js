@@ -1,18 +1,33 @@
 const mongoose = require('mongoose');
 
 let IntakeForm = new mongoose.Schema({
+    //Form Primary ID
+    IntakeFormID: {
+        type: Number,
+        required: true
+    },
+    //Tracks the version of Intakeform for each change
+    IntakeFormVersion: {
+        type: Number,
+        required: true
+    },
+    //Functionally deletes
+    IsActive: {
+        type: Boolean,
+        required: true
+    },
     //Case Information
     CaseNum: {
-      type: Number
+        type: Number
     },
     ClientNum: {
-      type: Number
+        type: Number
     },
     StartDate: {
-      type: Date
+        type: Date
     },
     CloseDate: {
-      type: Date
+        type: Date
     },
     //General Information
     LastName: {
