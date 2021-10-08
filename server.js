@@ -5,6 +5,7 @@ require("dotenv").config();
 const app = express();
 
 let IntakeForm = require('./intakeform.js');
+let Referrals = require('./referrals.js');
 
 mongoose
   .connect(process.env.MONGO_URL)   // read environment varibale from .env
@@ -85,7 +86,7 @@ app.get('/clientsbyformid/:id', (req, res, next) => {
   })
 });
 
-//GET /view find by object id
+//GET /view find by IntakeForm object id
 app.get('/clients/:id', (req, res, next) => {
   IntakeForm.findById(req.params.id, (error, data) => {
     if (error) {
@@ -143,6 +144,66 @@ app.put('/clients/:id', (req, res, next) => {
     }
   })
 });
+
+//GET /view all referrals
+app.get('/referrals', (req, res, next) => {
+  Referrals.find((error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  })
+});
+
+//GET /view find by referral object id
+app.get('/referrals/:id', (req, res, next) => {
+  Referrals.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  })
+});
+
+//POST /creates a referral
+app.post('/referrals', (req, res, next) => {
+  Referrals.create(req.body, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.send('Referral has been added to the database');
+      }
+  });
+});
+
+//PUT /updates a referral
+app.put('/referrals/:id', (req, res, next) => {
+  Referrals.findOneAndUpdate({ _id: req.params.id }, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.send('Referral updated successfully');
+      }
+    })
+});
+
+//DELETE /deletes referral by id
+app.delete('/referrals/:id', (req, res, next) => {
+  Referrals.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+       }
+     });
+});
+
 
 //error handler
 app.use(function (err, req, res, next) {
