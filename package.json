@@ -2,9 +2,11 @@
   "name": "project-cis_4339_project_10",
   "version": "1.0.0",
   "description": "project-cis_4339_project_10 created by GitHub Classroom\r Option C: Restoring Justice\r asd",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js --ignore 'frontend/'",
+    "frontend": "npm run serve --prefix frontend",
+    "dev": "concurrently \"npm run start\" \"npm run frontend\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,9 @@
   },
   "homepage": "https://github.com/CIS-FA21/project-cis_4339_project_10#readme",
   "dependencies": {
+    "@vue/cli": "^4.5.15",
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -25,6 +30,7 @@
     "vue": "^3.2.21"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "@vue/cli": "^4.5.15"
   }
 }
