@@ -4,7 +4,8 @@ let ReferralForm = new mongoose.Schema({
     //Form Primary ID
     CaseNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     CaseManager: {
         type: String

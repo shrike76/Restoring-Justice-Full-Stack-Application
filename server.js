@@ -2,7 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require("morgan");
 require("dotenv").config();
+const cors = require('cors');
+const corsOptions ={
+  origin:'http://localhost:8080',
+  credentials:true,
+  optionSuccessStatus:200
+}
 const app = express();
+
+app.use(cors(corsOptions));
 
 let IntakeForm = require('./intakeform.js');
 let Referrals = require('./referrals.js');
@@ -86,6 +94,7 @@ app.get('/clientsbyformid/:id', (req, res, next) => {
   })
 });
 
+//
 //GET /view find by IntakeForm object id
 app.get('/clients/:id', (req, res, next) => {
   IntakeForm.findById(req.params.id, (error, data) => {
