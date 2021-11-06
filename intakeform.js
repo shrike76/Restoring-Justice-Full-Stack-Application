@@ -142,7 +142,7 @@ let IntakeForm = new mongoose.Schema({
     },
     MaritalStatus: {
         type: String,
-        enum: ['Single,','Married','Seperated','Divorced','Widow','CommonLaw']
+        enum: ['Single','Married','Seperated','Divorced','Widow','CommonLaw']
     },
     //will validate on front end
     Language: [String],

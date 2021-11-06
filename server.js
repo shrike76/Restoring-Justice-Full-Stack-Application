@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const morgan = require("morgan");
 require("dotenv").config();
 const cors = require('cors');
+const app = express();
+
 const corsOptions ={
   origin:'http://localhost:8080',
   credentials:true,
   optionSuccessStatus:200
 }
-const app = express();
+
 
 app.use(cors(corsOptions));
 
@@ -58,6 +60,7 @@ app.post('/clients', (req, res, next) => {
     GetMaxID.then(function(data){
       let maxID = data.IntakeFormID ?? 0; //Nullish Coalescing operator to handle an empty collection https://stackoverflow.com/questions/1011317/replace-a-value-if-null-or-undefined-in-javascript
       req.body.IntakeFormID = ++maxID; //Increments new form to next ID
+      req.body.IsActive = true;
       req.body.IntakeFormVersion = 1;  //Sets initial version for new form
 
       //creates an updated version

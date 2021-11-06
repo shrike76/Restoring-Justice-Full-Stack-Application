@@ -1,4 +1,4 @@
-# frontend
+# vue-student-management-app
 
 ## Project setup
 ```
