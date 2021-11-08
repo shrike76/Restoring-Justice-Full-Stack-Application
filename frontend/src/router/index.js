@@ -15,6 +15,11 @@ const routes = [
     name: 'create',
     component: () => import('../components/CreateComponent')
   },
+  // {
+  //   path: '/create/:id',
+  //   name: 'createid',
+  //   component: () => import('../components/CreateComponent')
+  // },
   {
     path: '/view',
     name: 'view',

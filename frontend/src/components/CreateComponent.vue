@@ -116,20 +116,36 @@
 
 
 <script>
+
     import axios from "axios";
 
     export default {
         data() {
             return {
+                //need all schema inputs to be added to this list
                 intakeForm: {
-                   CaseNum: '323',
-                   ClientNum: '22',
-                   StartDate: '11/11/1111',
-                   CloseDate: '11/22/2111',
+                   CaseNum: '',
+                   ClientNum: '',
+                   StartDate: '',
+                   CloseDate: '',
                    IsUSCitizen: '',
                    MaritalStatus: ''
                 }
             }
+        },
+        created() {
+            var id = this.$route.params.id;
+            if (id){
+            let apiURL = 'http://localhost:3000/clients/' + id;
+                axios.get(apiURL)
+                    .then((response) => {
+                    // console.log(response)
+                    // set your form data not sure of the correct form from above but same idea
+                    this.intakeForm = response.data;  // however the response is formatted from Laravel may differ
+                    })
+                    .catch((error) => {
+                    console.log(error.response)
+                    })}
         },
         methods: {
             handleSubmitForm() {

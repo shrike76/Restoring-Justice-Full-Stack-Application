@@ -3,16 +3,13 @@
     <!-- Nav bar -->
     <nav class="navbar navbar-expand navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand float-left " href="/">Student Management App</a>
+        <a class="navbar-brand float-left " href="/">Restoring Justice</a>
         <ul class="nav navbar-nav mr-auto" >
           <li class="nav-item">
-            <router-link class="nav-link" to="/create">Create Student</router-link>
+            <router-link class="nav-link" to="/create">Create Client</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/view">View Students</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+            <router-link class="nav-link" to="/view">View Clients</router-link>
           </li>
         </ul>
       </div>
