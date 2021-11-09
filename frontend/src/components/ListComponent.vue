@@ -9,8 +9,6 @@
             <b-table striped :items="intakeForm" :fields="tableFields" :filter="filterinput" >
             </b-table>
             -->
-
-
               
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -33,11 +31,10 @@
                         <td>{{ intake.CloseDate }}</td>
                         <td>
                         <!--code taken from https://forum.vuejs.org/t/how-to-populate-form-depend-on-the-dropdown-selection/47373-->
-                            <router-link :to="{name: 'create', params: { id: intake._id }}" @change="viewRecord('intake._id')" class="btn btn-success ">View
+                            <router-link :to="{name: 'create', params: { id: intake._id }}" @change="viewRecord('intake.IntakeFormID')" class="btn btn-success ">View
                            
                             </router-link>
-                            {{intake._id}}
-                        <!--<button @click.prevent="deleteStudent(student._id)" class="btn btn-danger mx-2">Delete</button>-->
+                        <button @click.prevent="deleteRecord(intake._id)" class="btn btn-danger mx-2">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -78,7 +75,7 @@
         
         // this is using created hook 
         created() {
-            let apiURL = 'http://localhost:3000/clients';
+            let apiURL = 'http://localhost:3000/clientslatest';
             axios.get(apiURL).then(res => {
                 this.Intake = res.data;
             }).catch(error => {
@@ -88,37 +85,39 @@
         methods: {
             //code taken from https://forum.vuejs.org/t/how-to-populate-form-depend-on-the-dropdown-selection/47373
             viewRecord: function (id) {
-                let apiURL = 'http://localhost:3000/clients/' + id;
+                let apiURL = 'http://localhost:3000/clientsbyformid/' + id;
                 this.$axios.$get(apiURL)
                     .then((response) => {
-                    console.log(response)
                     // set your form data not sure of the correct form from above but same idea
                     this.intake._id = response.data;  // however the response is formatted from Laravel may differ
                     })
                     .catch((error) => {
                     console.log(error.response)
                     })
+            },
+            deleteRecord: function(id) {
+                let apiURL = 'http://localhost:3000/clients/' + id;
+                axios.put(apiURL).then(() => {
+                location.reload();
+                })
+                .catch((error) => {
+                console.log(error.response)
+                })
             }
         }
+        //     deleteStudent(id){
+        //         let apiURL = `http://localhost:3000/student/${id}`;
+        //         let indexOfArrayItem = this.Students.findIndex(i => i._id === id);
 
+        //         if (window.confirm("Do you really want to delete?")) {
+        //             axios.delete(apiURL).then(() => {
+        //                 this.Students.splice(indexOfArrayItem, 1);
+        //             }).catch(error => {
+        //                 console.log(error)
+        //             });
+        //         }
+        //     }
 
-
-
-       /* methods: {
-            deleteStudent(id){
-                console.log(id)
-                let apiURL = `http://localhost:3000/student/${id}`;
-                let indexOfArrayItem = this.Students.findIndex(i => i._id === id);
-
-                if (window.confirm("Do you really want to delete?")) {
-                    axios.delete(apiURL).then(() => {
-                        this.Students.splice(indexOfArrayItem, 1);
-                    }).catch(error => {
-                        console.log(error)
-                    });
-                }
-            }
-        }*/
     }
 </script>
 

@@ -43,26 +43,32 @@ app.use(morgan("dev"));  //enable incoming request logging in dev mode
 
 //POST/create/update //Handles revisions and creates new forms
 app.post('/clients', (req, res, next) => {
-  //Increments version id for existing forms
-  if (req.body.IntakeFormID != null){
-    req.body.IntakeFormVersion = ++req.body.IntakeFormVersion; 
-    //creates a new form
-    IntakeForm.create(req.body, (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data)
-      }
-    });
+  req.body.IntakeFormDate = new Date(); //creates date for versioning
+  //edits existing intake form
+  if (req.body.IntakeFormID != null){ 
+        IntakeForm.create(req.body, (error, data) => {
+          if (error) {
+            return next(error)
+          } else {
+            //gets previous version and references the new version to it
+            IntakeForm.findOneAndUpdate({IntakeFormID: req.body.IntakeFormID, IntakeFormNext: {$size: 0}, _id: {$ne: data._id} }, {
+              $push: {IntakeFormNext: data}
+            }, (error, data1) => {
+              if (error) {
+                return next(error);
+              } else {
+                res.json(data)
+              }
+            })
+          }
+      });
   } else { //Handles creating new intake forms
     //Gets max IntakeFormID in database to set next form id 
     let GetMaxID = IntakeForm.findOne().sort({IntakeFormID: -1}).exec();
     GetMaxID.then(function(data){
-      let maxID = data.IntakeFormID ?? 0; //Nullish Coalescing operator to handle an empty collection https://stackoverflow.com/questions/1011317/replace-a-value-if-null-or-undefined-in-javascript
+      let maxID = data?.IntakeFormID ?? 0; //Nullish Coalescing operator to handle an empty collection https://stackoverflow.com/questions/1011317/replace-a-value-if-null-or-undefined-in-javascript
       req.body.IntakeFormID = ++maxID; //Increments new form to next ID
       req.body.IsActive = true;
-      req.body.IntakeFormVersion = 1;  //Sets initial version for new form
-
       //creates an updated version
       IntakeForm.create(req.body, (error, data) => {
         if (error) {
@@ -77,12 +83,12 @@ app.post('/clients', (req, res, next) => {
 
 //GET /view all plus all versions
 app.get('/clients', (req, res, next) => {
-  IntakeForm.find((error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.json(data);
-    }
+    IntakeForm.find({IsActive: true},(error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
   })
 });
 
@@ -111,38 +117,13 @@ app.get('/clients/:id', (req, res, next) => {
 
 //GET/view all by newest version
 app.get('/clientslatest/', (req, res, next) => {
-
-  //uses an aggregate function to get latest versions of each document. https://stackoverflow.com/questions/56083428/mongodb-get-all-entries-with-most-recent-revision
-  IntakeForm.aggregate([
-    //gets latest IntakeFormVersion for each IntakeFormID
-    { $group : { _id: '$IntakeFormID','maxRevision':{'$max': '$IntakeFormVersion' }, "originalDocuments": { "$push": "$$ROOT" }}},
-    {
-      //gets entire document based on group by made above
-      $project: {
-        "originalDocument": {
-          "$filter": {
-            "input": "$originalDocuments",
-            "as": "doc",
-            "cond": {
-              "$and": [
-                { "$eq": ["$maxRevision", "$$doc.IntakeFormVersion"] }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      //https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
-      "$unwind": "$originalDocument"
+  IntakeForm.find({IsActive: true, IntakeFormNext: {$size: 0}},(error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
     }
-  ], (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data);
-      }
-  });
+})
 });
 
 //PUT (functional delete)
@@ -224,3 +205,40 @@ app.use(function (err, req, res, next) {
     err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+//old get latest code, might need later
+/*app.get('/clientslatest/', (req, res, next) => {
+
+  //uses an aggregate function to get latest versions of each document. https://stackoverflow.com/questions/56083428/mongodb-get-all-entries-with-most-recent-revision
+  IntakeForm.aggregate([
+    //gets latest IntakeFormVersion for each IntakeFormID
+    { $group : { _id: '$IntakeFormID','maxRevision':{'$max': '$IntakeFormVersion' }, "originalDocuments": { "$push": "$$ROOT" }}},
+    {
+      //gets entire document based on group by made above
+      $project: {
+        "originalDocument": {
+          "$filter": {
+            "input": "$originalDocuments",
+            "as": "doc",
+            "cond": {
+              "$and": [
+                { "$eq": ["$maxRevision", "$$doc.IntakeFormVersion"] }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      //https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
+      "$unwind": "$originalDocument"
+    }
+  ], (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data);
+      }
+  });
+});
+*/

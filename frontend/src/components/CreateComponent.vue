@@ -124,15 +124,16 @@
             return {
                 //need all schema inputs to be added to this list
                 intakeForm: {
-                   CaseNum: '',
-                   ClientNum: '',
-                   StartDate: '',
-                   CloseDate: '',
+                   CaseNum: '22',
+                   ClientNum: '22',
+                   StartDate: '11/11/1111',
+                   CloseDate: '11/11/1112',
                    IsUSCitizen: '',
                    MaritalStatus: ''
                 }
             }
         },
+        //populates from view if id
         created() {
             var id = this.$route.params.id;
             if (id){
@@ -142,6 +143,7 @@
                     // console.log(response)
                     // set your form data not sure of the correct form from above but same idea
                     this.intakeForm = response.data;  // however the response is formatted from Laravel may differ
+                    delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
                     })
                     .catch((error) => {
                     console.log(error.response)
@@ -150,8 +152,8 @@
         methods: {
             handleSubmitForm() {
                 let apiURL = 'http://localhost:3000/clients';
-                
                 axios.post(apiURL, this.intakeForm).then(() => {
+                    //console.log('success')
                     //chnaging the view to the list
                   //this.$router.push('/view')
                   /*this.intakeForm = {

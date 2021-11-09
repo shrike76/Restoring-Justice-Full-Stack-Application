@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = require('bson');
 
 let IntakeForm = new mongoose.Schema({
     //Form Primary ID
@@ -6,10 +7,14 @@ let IntakeForm = new mongoose.Schema({
         type: Number,
         required: true
     },
-    //Tracks the version of Intakeform for each change
-    IntakeFormVersion: {
-        type: Number,
-        required: true
+    //tracks the version 
+    IntakeFormNext: {
+        type: [ObjectId],
+        ref: "IntakeForm"
+    },
+    //tracks date of version edits
+    IntakeFormDate: {
+        type: Date,
     },
     //Functionally deletes
     IsActive: {
