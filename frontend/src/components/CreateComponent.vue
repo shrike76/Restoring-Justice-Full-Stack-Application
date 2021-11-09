@@ -214,21 +214,21 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.Employer">
+            <div class="col-md-6" v-show="intakeForm.IsEmployed">
                 <div class="form-group">
                     <label>Employer:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Employer">
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.HowLongE">
+            <div class="col-md-6" v-show="intakeForm.IsEmployed">
                 <div class="form-group">
                     <label>How Long:</label>
                     <input type="text" class="form-control" v-model="intakeForm.HowLongE">
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.Occupation">
+            <div class="col-md-6" v-show="intakeForm.IsEmployed">
                 <div class="form-group">
                     <label>Occupation:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Occupation">
@@ -247,7 +247,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.HowLongU">
+            <div class="col-md-6" v-show="intakeForm.IsUnemployed">
                 <div class="form-group">
                     <label>How Long:</label>
                     <input type="text" class="form-control" v-model="intakeForm.HowLongU">
@@ -266,7 +266,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.HowLongR">
+            <div class="col-md-6" v-show="intakeForm.IsRetired">
                 <div class="form-group">
                     <label>How Long:</label>
                     <input type="text" class="form-control" v-model="intakeForm.HowLongR">
@@ -304,14 +304,14 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.School">
+            <div class="col-md-6" v-show="intakeForm.IsAttendedSchool">
                 <div class="form-group">
                     <label>School:</label>
                     <input type="text" class="form-control" v-model="intakeForm.School">
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.LastGrade">
+            <div class="col-md-6" v-show="intakeForm.IsAttendedSchool">
                 <div class="form-group">
                     <label>Last Grade:</label>
                     <input type="text" class="form-control" v-model="intakeForm.LastGrade">
@@ -356,7 +356,7 @@
             </div>
 
 
-            <div class="col-md-6" v-show="intakeForm.Certification">
+            <div class="col-md-6" v-show="intakeForm.Graduated">
                 <div class="form-group">
                     <label>Certification:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Certification">
@@ -383,68 +383,68 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.MonthlyIncome">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Monthly income</label>
                     <input type="text" class="form-control" v-model="intakeForm.MonthlyIncome">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.OtherIncome">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Other Income:</label>
                     <input type="text" class="form-control" v-model="intakeForm.OtherIncome">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.SpousalSupport">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Spousal Support:</label>
                     <input type="text" class="form-control" v-model="intakeForm.SpousalSupport">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.WorkersComp">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Worker's Comp:</label>
                     <input type="text" class="form-control" v-model="intakeForm.WorkersComp">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.ChildSupport">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Child Support:</label>
                     <input type="text" class="form-control" v-model="intakeForm.ChildSupport">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.Tanf">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>TANF:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Tanf">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.Ssi">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>SSI:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Ssi">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.Unemployment">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Unemployment:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Unemployment">
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.SocialSecurity">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Social Security:</label>
                     <input type="text" class="form-control" v-model="intakeForm.SocialSecurity">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.Other">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Other:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Other">
                 </div>
             </div>
-            <div class="col-md-6" v-show="intakeForm.Notes">
+            <div class="col-md-6" v-show="intakeForm.IsHeadOfHouse">
                 <div class="form-group">
                     <label>Notes:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Notes">
@@ -504,7 +504,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.HowMuch">
+            <div class="col-md-6" v-show="intakeForm.IsDrugsOrAlcohol">
                 <div class="form-group">
                     <label>If yes, what and how much?</label>
                     <input type="text" class="form-control" v-model="intakeForm.HowMuch">
@@ -527,14 +527,14 @@
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.Notes">
+            <div class="col-md-6" v-show="intakeForm.IsTreatment">
                 <div class="form-group">
                     <label>Notes:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Notes">
                 </div>
             </div>
 
-            <div class="col-md-6" v-show="intakeForm.History">
+            <div class="col-md-6" v-show="intakeForm.IsTreatment">
                 <div class="form-group">
                     <label>Treatment History:</label>
                     <input type="text" class="form-control" v-model="intakeForm.History">
