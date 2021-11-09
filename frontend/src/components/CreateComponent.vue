@@ -543,26 +543,8 @@
 
 
         </div>
-<<<<<<< HEAD
+
         <button class="btn btn-danger mt-3" id="btnSubmit">Create</button>
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <button class="btn btn-danger mt-3">Create</button>
->>>>>>> 424747697273ea2d0ced6d9b97ea1b22d2d51bfb
     </form>
 
 </template>
