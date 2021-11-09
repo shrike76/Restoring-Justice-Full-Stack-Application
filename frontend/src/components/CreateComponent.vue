@@ -109,7 +109,7 @@
 
 
         </div>
-        <button class="btn btn-danger mt-3">Create</button>
+        <button class="btn btn-danger mt-3" id="btnSubmit">Create</button>
     </form>
 
 </template>
@@ -133,10 +133,16 @@
                 }
             }
         },
+        mounted() {
+            if (this.$route.params.id){
+                document.getElementById('btnSubmit').innerText = 'Edit';
+            }
+        },
         //populates from view if id
         created() {
             var id = this.$route.params.id;
             if (id){
+                
             let apiURL = 'http://localhost:3000/clients/' + id;
                 axios.get(apiURL)
                     .then((response) => {
