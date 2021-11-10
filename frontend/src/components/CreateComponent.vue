@@ -1,5 +1,9 @@
 <template>
+    <label>Past Versions</label>
+    <b-form-select :options="previousIntakeForms" value-field="_id" text-field="IntakeFormDate" @change="viewPrevious($event)" style= "width:305px">
+    </b-form-select>
     <form @submit.prevent="handleSubmitForm">
+
         <!--CaseNum, ClientNum, StartDate, CloseDate-->
         <div class="row">
             <div class="col-md-3">
@@ -23,7 +27,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Close Date</label>
-                    <input type="text" class="form-control" v-model="intakeForm.CloseDate" required>
+                    <input type="text" class="form-control" v-model="intakeForm.CloseDate">
                 </div>
             </div>
         </div>
@@ -133,37 +137,37 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Home Ph #</label>
-                    <input type="text" class="form-control" v-model="intakeForm.HomePhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.HomePhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Work Phone</label>
-                    <input type="text" class="form-control" v-model="intakeForm.WorkPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.WorkPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Cell</label>
-                    <input type="text" class="form-control" v-model="intakeForm.CellPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.CellPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Other</label>
-                    <input type="text" class="form-control" v-model="intakeForm.OtherPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.OtherPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Personal Email</label>
-                    <input type="text" class="form-control" v-model="intakeForm.PersonalEmail" required>
+                    <input type="text" class="form-control" v-model="intakeForm.PersonalEmail">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Other Email</label>
-                    <input type="text" class="form-control" v-model="intakeForm.OtherEmail" required>
+                    <input type="text" class="form-control" v-model="intakeForm.OtherEmail">
                 </div>
             </div>
         </div>
@@ -289,7 +293,7 @@
             <!--school, education, Last grade -->
         <div class="row">
             <div class="col-md-4">
-                <label>Have You Attend School?</label>
+                <label>Have You Attended School?</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="true" v-model="intakeForm.IsAttendedSchool" >
                     <label class="form-check-label">
@@ -472,7 +476,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" v-show="intakeForm.IsHealthInsurance">
                 <label class="form-label">
                     Health Insurance Type 
                 </label>
@@ -544,6 +548,175 @@
 
         </div>
 
+        <!--Legal Information -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Case #</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CaseNo">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> Mental Competency:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="true" v-model="intakeForm.IsMentalCompetency" >
+                    <label class="form-check-label">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="false" v-model="intakeForm.IsMentalCompetency" >
+                    <label class="form-check-label">
+                        No
+                    </label>
+                </div>
+            </div>
+
+           
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>File Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.FileDate">
+                </div>
+            </div>
+
+           
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Prior Attorney Name:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.PriorAttorneyName">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Prior Attorney Caseload:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.PriorAttorneyCaseLoad">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Current Court:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CurrentCourt">
+                </div>
+            </div>    
+
+                <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Court Address:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CourtAddress">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Judge Name:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.JudgeName">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Court Type:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CourtType">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Case Completion Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CompletionDate">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Defendant Status:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Status">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Bond Amount:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.BondAmount">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Next/Last Settling Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.SettlingDate">
+                </div>
+            </div>
+
+            
 
 
 
@@ -555,12 +728,12 @@
 
 
 
+        </div>
 
 
 
-        <button class="btn btn-danger mt-3">Create</button>
+        <button class="btn btn-danger mt-3" id="btnSubmit">Create</button>
     </form>
-
 </template>
 
 
@@ -571,6 +744,7 @@
     export default {
         data() {
             return {
+                isVisible: false,
                 //need all schema inputs to be added to this list
                 intakeForm: {
                    CaseNum: '22',
@@ -579,20 +753,38 @@
                    CloseDate: '11/11/1112',
                    IsUSCitizen: '',
                    MaritalStatus: ''
-                }
+                },
+                previousIntakeForms: []
+            }
+            
+        },
+        mounted() {
+            if (this.$route.params.id){
+                document.getElementById('btnSubmit').innerText = 'Edit';
             }
         },
         //populates from view if id
         created() {
             var id = this.$route.params.id;
             if (id){
+                
             let apiURL = 'http://localhost:3000/clients/' + id;
                 axios.get(apiURL)
                     .then((response) => {
                     // console.log(response)
                     // set your form data not sure of the correct form from above but same idea
                     this.intakeForm = response.data;  // however the response is formatted from Laravel may differ
-                    delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
+
+
+                        let apiURL = 'http://localhost:3000/clientsprevious/' + response.data.IntakeFormID;
+                        axios.get(apiURL).then((res) => {                       
+                        this.previousIntakeForms = res.data;  
+                        })
+                        .catch((error) => {
+                        console.log(error.res)
+                        })
+
+
                     })
                     .catch((error) => {
                     console.log(error.response)
@@ -601,6 +793,7 @@
         methods: {
             handleSubmitForm() {
                 let apiURL = 'http://localhost:3000/clients';
+                delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
                 axios.post(apiURL, this.intakeForm).then(() => {
                     //console.log('success')
                     //chnaging the view to the list
@@ -614,8 +807,20 @@
                 }).catch(error => {
                     console.log(error)
                 });
-            }
-        }
-           
+            },
+            viewPrevious(id) {
+            let apiURL = 'http://localhost:3000/clients/' + id;
+                axios.get(apiURL).then((response) => {
+                    this.intakeForm = response.data; 
+                    document.getElementById("btnSubmit").disabled = true; 
+                    })
+                    .catch((error) => {
+                    console.log(error.response)
+                    })
+            },
+            // versionDropdown(isVisible) {
+            //         this.isVisible = isVisible
+            //     }
+            } 
     }
 </script>
