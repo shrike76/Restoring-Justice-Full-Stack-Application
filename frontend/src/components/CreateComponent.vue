@@ -476,7 +476,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" v-show="intakeForm.IsHealthInsurance">
                 <label class="form-label">
                     Health Insurance Type 
                 </label>
@@ -547,6 +547,190 @@
 
 
         </div>
+
+        <!--Legal Information -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Case #</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CaseNo">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> Mental Competency:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="true" v-model="intakeForm.IsMentalCompetency" >
+                    <label class="form-check-label">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="false" v-model="intakeForm.IsMentalCompetency" >
+                    <label class="form-check-label">
+                        No
+                    </label>
+                </div>
+            </div>
+
+           
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>File Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.FileDate">
+                </div>
+            </div>
+
+           
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Prior Attorney Name:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.PriorAttorneyName">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Prior Attorney Caseload:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.PriorAttorneyCaseLoad">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 1:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 2:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 3:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 4:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Charge 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Degree 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Punishment Range 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <label>Disposition 5:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Current Court:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CurrentCourt">
+                </div>
+            </div>    
+
+                <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Court Address:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CourtAddress">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Judge Name:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.JudgeName">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Court Type:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CourtType">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Case Completion Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.CompletionDate">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Defendant Status:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.Status">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Bond Amount:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.BondAmount">
+                </div>
+            </div>
+
+            <div class="col-md-3" v-show="intakeForm.CaseNo">
+                <div class="form-group">
+                    <label>Next/Last Settling Date:</label>
+                    <input type="text" class="form-control" v-model="intakeForm.SettlingDate">
+                </div>
+            </div>
+
+            
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
 
         <button class="btn btn-danger mt-3" id="btnSubmit">Create</button>
     </form>
