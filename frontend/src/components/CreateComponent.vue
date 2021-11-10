@@ -1,5 +1,9 @@
 <template>
+    <label>Past Versions</label>
+    <b-form-select :options="previousIntakeForms" value-field="_id" text-field="IntakeFormDate" @change="viewPrevious($event)" style= "width:305px">
+    </b-form-select>
     <form @submit.prevent="handleSubmitForm">
+
         <!--CaseNum, ClientNum, StartDate, CloseDate-->
         <div class="row">
             <div class="col-md-3">
@@ -17,13 +21,13 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Start Date</label>
-                    <input type="text" class="form-control" v-model="intakeForm.StartDate" required>
+                    <b-form-input type="text" class="form-control" :formatter="formatDate" v-model="intakeForm.StartDate" required></b-form-input>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Close Date</label>
-                    <input type="text" class="form-control" v-model="intakeForm.CloseDate" required>
+                    <input type="text" class="form-control" v-model="intakeForm.CloseDate">
                 </div>
             </div>
         </div>
@@ -133,37 +137,37 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Home Ph #</label>
-                    <input type="text" class="form-control" v-model="intakeForm.HomePhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.HomePhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Work Phone</label>
-                    <input type="text" class="form-control" v-model="intakeForm.WorkPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.WorkPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Cell</label>
-                    <input type="text" class="form-control" v-model="intakeForm.CellPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.CellPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Other</label>
-                    <input type="text" class="form-control" v-model="intakeForm.OtherPhone" required>
+                    <input type="text" class="form-control" v-model="intakeForm.OtherPhone">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Personal Email</label>
-                    <input type="text" class="form-control" v-model="intakeForm.PersonalEmail" required>
+                    <input type="text" class="form-control" v-model="intakeForm.PersonalEmail">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Other Email</label>
-                    <input type="text" class="form-control" v-model="intakeForm.OtherEmail" required>
+                    <input type="text" class="form-control" v-model="intakeForm.OtherEmail">
                 </div>
             </div>
         </div>
@@ -289,7 +293,7 @@
             <!--school, education, Last grade -->
         <div class="row">
             <div class="col-md-4">
-                <label>Have You Attend School?</label>
+                <label>Have You Attended School?</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="true" v-model="intakeForm.IsAttendedSchool" >
                     <label class="form-check-label">
@@ -546,17 +550,18 @@
 
         <button class="btn btn-danger mt-3" id="btnSubmit">Create</button>
     </form>
-
 </template>
 
 
 <script>
 
     import axios from "axios";
+    import moment from 'moment';
 
     export default {
         data() {
             return {
+                isVisible: false,
                 //need all schema inputs to be added to this list
                 intakeForm: {
                    CaseNum: '22',
@@ -565,8 +570,10 @@
                    CloseDate: '11/11/1112',
                    IsUSCitizen: '',
                    MaritalStatus: ''
-                }
+                },
+                previousIntakeForms: []
             }
+            
         },
         mounted() {
             if (this.$route.params.id){
@@ -584,7 +591,17 @@
                     // console.log(response)
                     // set your form data not sure of the correct form from above but same idea
                     this.intakeForm = response.data;  // however the response is formatted from Laravel may differ
-                    delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
+
+
+                        let apiURL = 'http://localhost:3000/clientsprevious/' + response.data.IntakeFormID;
+                        axios.get(apiURL).then((res) => {                       
+                        this.previousIntakeForms = res.data;  
+                        })
+                        .catch((error) => {
+                        console.log(error.res)
+                        })
+
+
                     })
                     .catch((error) => {
                     console.log(error.response)
@@ -593,6 +610,7 @@
         methods: {
             handleSubmitForm() {
                 let apiURL = 'http://localhost:3000/clients';
+                delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
                 axios.post(apiURL, this.intakeForm).then(() => {
                     //console.log('success')
                     //chnaging the view to the list
@@ -606,8 +624,26 @@
                 }).catch(error => {
                     console.log(error)
                 });
+            },
+            viewPrevious(id) {
+            let apiURL = 'http://localhost:3000/clients/' + id;
+                axios.get(apiURL).then((response) => {
+                    this.intakeForm = response.data; 
+                    document.getElementById("btnSubmit").disabled = true; 
+                    })
+                    .catch((error) => {
+                    console.log(error.response)
+                    })
+            },
+            // versionDropdown(isVisible) {
+            //         this.isVisible = isVisible
+            //     }
+
+            //UNFINISHED. date formatter taken from https://stackoverflow.com/questions/34308004/moment-js-with-vuejs
+            formatDate (value) {
+                console.log(value);
+                return moment(value).format('MM-DD-YYYY')
             }
-        }
-           
+            },   
     }
 </script>
