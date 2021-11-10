@@ -26,6 +26,9 @@ let ReferralForm = new mongoose.Schema({
     type: Date,
     get: FormatDate,
   },
+  HoursSpent: {
+    type: Number,
+  },
   UsedReferral: {
     type: Boolean,
   },

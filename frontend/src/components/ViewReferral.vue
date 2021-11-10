@@ -59,6 +59,7 @@
           label-for="nested-state"
           label-cols-sm="3"
           label-align-sm="end"
+          v-model="clientData.HoursSpent"
         >
           <b-form-input v-model="clientData.HoursSpent"></b-form-input>
         </b-form-group>
