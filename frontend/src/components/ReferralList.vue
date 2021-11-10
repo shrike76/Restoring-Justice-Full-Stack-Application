@@ -15,7 +15,7 @@
           <td>{{ data.CaseNumber }}</td>
           <td>{{ data.CaseManager }}</td>
           <td>{{ data.Date }}</td>
-          <td>{{ data.UsedReferral }}</td>
+          <td>{{ data.UsedReferral ? "Yes" : "No" }}</td>
           <td>
             <button @click="handleView(data._id)">View/Edit</button>
             <button @click.prevent="handleDelete(data._id)">Delete</button>
