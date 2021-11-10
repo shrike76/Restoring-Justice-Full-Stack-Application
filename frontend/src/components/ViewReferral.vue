@@ -14,7 +14,7 @@
           label-cols-sm="3"
           label-align-sm="end"
         >
-          <b-form-input v-model="data.CaseNumber"></b-form-input>
+          <b-form-input v-model="clientData.CaseNumber"></b-form-input>
         </b-form-group>
         <b-form-group
           label="Case Manager:"
@@ -22,7 +22,7 @@
           label-cols-sm="3"
           label-align-sm="end"
         >
-          <b-form-input v-model="data.CaseManager"></b-form-input>
+          <b-form-input v-model="clientData.CaseManager"></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -32,10 +32,10 @@
           label-align-sm="end"
         >
           <b-form-select
-            v-model="data.SocialServices"
             :options="ex1Options"
             size="sm"
             class="mt-3"
+            v-model="clientData.SocialServices"
           ></b-form-select>
         </b-form-group>
 
@@ -46,9 +46,9 @@
             </b-col>
             <b-col sm="9">
               <b-form-input
-                v-model="data.Date"
                 :id="`type-date`"
                 type="date"
+                v-model="clientData.Date"
               ></b-form-input>
             </b-col>
           </b-row>
@@ -60,7 +60,7 @@
           label-cols-sm="3"
           label-align-sm="end"
         >
-          <b-form-input v-model="data.HoursSpent"></b-form-input>
+          <b-form-input v-model="clientData.HoursSpent"></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -71,8 +71,7 @@
         >
           <b-form-textarea
             id="textarea"
-            v-model="data.Notes"
-            placeholder="Enter something..."
+            v-model="clientData.Notes"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -90,7 +89,7 @@
             class="pt-2"
             :options="['Yes', 'No']"
             :aria-describedby="ariaDescribedby"
-            v-model="data.UsedReferral"
+            v-model="computedResult"
           ></b-form-radio-group>
         </b-form-group>
 
@@ -104,24 +103,25 @@
           <b-form-radio-group
             class="pt-2"
             :options="['Not at all', 'Partially', 'Fully']"
+            v-model="clientData.NeedsAddressed"
             :aria-describedby="ariaDescribedby"
-            v-model="data.NeedsAddressed"
           ></b-form-radio-group>
         </b-form-group>
 
         <b-form-group class="mt-3">
-          <b-button variant="primary" @click="handleData">Submit</b-button>
+          <b-button variant="primary" @click="handleSubmit">Submit</b-button>
         </b-form-group>
       </b-form-group>
     </b-card>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 export default {
+  props: ["currentData"],
   data() {
     return {
+      clientData: {},
       ex1Options: [
         "Transportation",
         "Nutrition",
@@ -141,36 +141,30 @@ export default {
         "Drug Testing",
         "Other",
       ],
-      data: {
-        CaseNumber: "",
-        CaseManager: "",
-        SocialServices: "",
-        Date: "",
-        hoursSpent: "",
-        Notes: "",
-        UsedReferral: "",
-        NeedsAddressed: "",
-        HoursSpent: "",
-      },
     };
   },
-  methods: {
-    handleData() {
-      if (this.data.UsedReferral == "Yes") {
-        this.data.UsedReferral = true;
-      } else {
-        this.data.UsedReferral = false;
-      }
 
-      let apiURL = "http://localhost:3000/referrals";
-      axios
-        .post(apiURL, this.data)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  created() {
+    let apiURL = `http://localhost:3000/referrals/${this.currentData}`;
+
+    axios.get(apiURL).then((res) => (this.clientData = res.data));
+  },
+  methods: {
+    handleSubmit() {
+      // console.log(this.computedResult);
+
+      let apiURL = `http://localhost:3000/referrals/${this.clientData._id}`;
+
+      axios.put(apiURL, this.clientData);
+    },
+  },
+  computed: {
+    computedResult: function() {
+      if (this.clientData.UsedReferral == true) {
+        return "Yes";
+      } else {
+        return "No";
+      }
     },
   },
 };

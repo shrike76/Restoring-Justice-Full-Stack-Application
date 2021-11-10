@@ -18,6 +18,11 @@
               >Create referral</router-link
             >
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/view-referral"
+              >View referrals</router-link
+            >
+          </li>
         </ul>
       </div>
     </nav>
