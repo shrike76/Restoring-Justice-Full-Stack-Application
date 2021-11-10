@@ -31,7 +31,7 @@
                         <td>{{ intake.CloseDate }}</td>
                         <td>
                         <!--code taken from https://forum.vuejs.org/t/how-to-populate-form-depend-on-the-dropdown-selection/47373-->
-                            <router-link :to="{name: 'create', params: { id: intake._id }}" @change="viewRecord('intake.IntakeFormID')" class="btn btn-success ">View
+                            <router-link :to="{name: 'create', params: { id: intake._id }}" @change="viewRecord('intake._id')" class="btn btn-success ">View
                            
                             </router-link>
                         <button @click.prevent="deleteRecord(intake._id)" class="btn btn-danger mx-2">Delete</button>
@@ -85,7 +85,7 @@
         methods: {
             //code taken from https://forum.vuejs.org/t/how-to-populate-form-depend-on-the-dropdown-selection/47373
             viewRecord: function (id) {
-                let apiURL = 'http://localhost:3000/clientsbyformid/' + id;
+                let apiURL = 'http://localhost:3000/clients/' + id;
                 this.$axios.$get(apiURL)
                     .then((response) => {
                     // set your form data not sure of the correct form from above but same idea

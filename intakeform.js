@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 const { ObjectId } = require('bson');
 
+function FormatDate(value){
+    if (value){
+    return value.toLocaleString('en-US');
+    }
+    else {
+        return value;
+    }
+}
+
 let IntakeForm = new mongoose.Schema({
     //Form Primary ID
     IntakeFormID: {
@@ -15,6 +24,7 @@ let IntakeForm = new mongoose.Schema({
     //tracks date of version edits
     IntakeFormDate: {
         type: Date,
+        get: FormatDate
     },
     //Functionally deletes
     IsActive: {
@@ -29,10 +39,12 @@ let IntakeForm = new mongoose.Schema({
         type: Number
     },
     StartDate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     CloseDate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     //General Information
     LastName: {
@@ -45,7 +57,8 @@ let IntakeForm = new mongoose.Schema({
         type: String
     },
     Birthdate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     //regrex from https://www.geeksforgeeks.org/how-to-validate-ssn-social-security-number-using-regular-expression/
     SocialSecurity: {
@@ -293,7 +306,8 @@ let IntakeForm = new mongoose.Schema({
         type: Boolean
     },
     FileDate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     PriorAttorneyName: {
         type: String
@@ -320,7 +334,8 @@ let IntakeForm = new mongoose.Schema({
         type: String
     },
     CompletionDate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     Status: {
         type: String
@@ -329,8 +344,12 @@ let IntakeForm = new mongoose.Schema({
         type: mongoose.Schema.Types.Decimal128
     },
     SettlingDate: {
-        type: Date
+        type: Date,
+        get: FormatDate
     }
 });
 
+//code taken from https://stackoverflow.com/questions/21832088/why-are-my-mongoose-3-8-7-schema-getters-and-setters-being-ignored
+IntakeForm.set('toJSON', { getters: true });
+IntakeForm.set('toObject', { getters: true });
 module.exports = mongoose.model('IntakeForm', IntakeForm);
