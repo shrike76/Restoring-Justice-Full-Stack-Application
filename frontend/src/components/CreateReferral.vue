@@ -3,7 +3,7 @@
     <b-card bg-variant="light">
       <b-form-group
         label-cols-lg="3"
-        label="Referral"
+        label="Create Referral"
         label-size="lg"
         label-class="fw-bold pt-0"
         class="mb-0"
@@ -167,6 +167,8 @@ export default {
         .post(apiURL, this.data)
         .then((res) => {
           console.log(res);
+          this.data = "";
+          alert(res.data);
         })
         .catch((err) => {
           console.log(err);

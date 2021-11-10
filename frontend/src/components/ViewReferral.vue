@@ -3,7 +3,7 @@
     <b-card bg-variant="light">
       <b-form-group
         label-cols-lg="3"
-        label="Referral"
+        label="Edit Referral"
         label-size="lg"
         label-class="fw-bold pt-0"
         class="mb-0"
@@ -156,7 +156,10 @@ export default {
 
       let apiURL = `http://localhost:3000/referrals/${this.clientData._id}`;
 
-      axios.put(apiURL, this.clientData);
+      axios.put(apiURL, this.clientData).then((res) => {
+        console.log(res);
+        alert(res.data);
+      });
     },
   },
   computed: {
