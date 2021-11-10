@@ -21,7 +21,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Start Date</label>
-                    <b-form-input type="text" class="form-control" :formatter="formatDate" v-model="intakeForm.StartDate" required></b-form-input>
+                    <input type="text" class="form-control" v-model="intakeForm.StartDate" required>
                 </div>
             </div>
             <div class="col-md-3">
@@ -556,7 +556,6 @@
 <script>
 
     import axios from "axios";
-    import moment from 'moment';
 
     export default {
         data() {
@@ -638,12 +637,6 @@
             // versionDropdown(isVisible) {
             //         this.isVisible = isVisible
             //     }
-
-            //UNFINISHED. date formatter taken from https://stackoverflow.com/questions/34308004/moment-js-with-vuejs
-            formatDate (value) {
-                console.log(value);
-                return moment(value).format('MM-DD-YYYY')
-            }
-            },   
+            } 
     }
 </script>

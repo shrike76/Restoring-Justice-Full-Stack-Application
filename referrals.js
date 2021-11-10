@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+function FormatDate(value){
+    console.log(value);
+    return value.toLocaleString('en-US');
+}
+
 let ReferralForm = new mongoose.Schema({
     //Form Primary ID
     CaseNumber: {
@@ -18,7 +23,8 @@ let ReferralForm = new mongoose.Schema({
         type: String
     },
     Date: {
-        type: Date
+        type: Date,
+        get: FormatDate
     },
     UsedReferral: {
         type: Boolean
@@ -29,4 +35,7 @@ let ReferralForm = new mongoose.Schema({
     }
 });
 
+//code taken from https://stackoverflow.com/questions/21832088/why-are-my-mongoose-3-8-7-schema-getters-and-setters-being-ignored
+ReferralForm.set('toJSON', { getters: true });
+ReferralForm.set('toObject', { getters: true });
 module.exports = mongoose.model('Referral', ReferralForm);
