@@ -32,11 +32,11 @@ export default {
     axios
       .get(apiURL)
       .then((res) => (this.referralData = res.data))
-      .then(this.testM);
+      .then(this.setCaseManagerData);
   },
 
   methods: {
-    testM() {
+    setCaseManagerData() {
       this.referralData.forEach((currentReferralData) => {
         let count = 0;
         for (let i = 0; i < this.referralData.length; i++) {
@@ -53,9 +53,6 @@ export default {
           Count: count,
         };
 
-        // if (this.caseManagers[0]) {
-        //   for (let i = 0; i < this.caseManagers.length; i++) {
-
         let isThere = this.caseManagers.find(
           (caseManager) =>
             caseManager.CaseManager.toLowerCase() ==
@@ -69,10 +66,6 @@ export default {
         } else {
           console.log("here");
         }
-
-        //   }
-        // } else {
-        // }
       });
     },
   },
