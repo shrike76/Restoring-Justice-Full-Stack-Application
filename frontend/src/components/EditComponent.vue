@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <!-- Update Student content -->
+            <!-- Update client content -->
             <h3 class="text-center">Update Student</h3>
             <form @submit.prevent="handleUpdateForm">
                 <div class="form-group">
