@@ -219,6 +219,9 @@ let IntakeForm = new mongoose.Schema({
         type: String,
         enum: ['Elementary,','HighSchool','AttendCollege','TechnicalSchool','AssociateDegree','BachelorDegree','MasterDegree','PHD']
     },
+    Graduated1: {
+        type: Boolean
+    },
     Certification:{
         type: String
     },
