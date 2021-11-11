@@ -119,6 +119,7 @@
 <script>
 import axios from "axios";
 export default {
+  //holds the id for the specific referral, will be used when fetching the data
   props: ["currentData"],
   data() {
     return {
@@ -148,16 +149,18 @@ export default {
 
   created() {
     let apiURL = `http://localhost:3000/referrals/${this.currentData}`;
-
+    //gets the data from backend and places it inside clientData
     axios
       .get(apiURL)
       .then((res) => (this.clientData = res.data))
       .then(this.convertData);
   },
   methods: {
+    //handles the update for a referral
     handleSubmit() {
       let apiURL = `http://localhost:3000/referrals/${this.clientData._id}`;
 
+      //converts from string to boolean for backend storage purposes
       if (this.clientData.UsedReferral == "Yes") {
         this.clientData.UsedReferral = true;
       } else {
@@ -171,6 +174,7 @@ export default {
       });
     },
 
+    //converts from boolean to String for frontend purposes
     convertData() {
       if (this.clientData.UsedReferral == true) {
         this.clientData.UsedReferral = "Yes";

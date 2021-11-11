@@ -1,4 +1,6 @@
 <template>
+  <!-- if clicked is true will display tables with all referrals 
+  else will display the indivdual referral in detail -->
   <div v-if="isClicked">
     <table class="table table-striped table-bordered">
       <thead>
@@ -15,6 +17,7 @@
           <td>{{ data.CaseNumber }}</td>
           <td>{{ data.CaseManager }}</td>
           <td>{{ data.Date }}</td>
+          <!-- converts from boolean to String -->
           <td>{{ data.UsedReferral ? "Yes" : "No" }}</td>
           <td>
             <button @click="handleView(data._id)">View/Edit</button>
@@ -26,6 +29,7 @@
   </div>
 
   <div v-else>
+    <!-- child component will render if false, also is passed referral id as a prop-->
     <ViewReferral :currentData="currentData" />
   </div>
 </template>
@@ -47,6 +51,7 @@ export default {
   },
 
   methods: {
+    //handles the delete function as well as rerenders component
     handleDelete(id) {
       let apiURL = `http://localhost:3000/referrals/${id}`;
       let indexOfArrayItem = this.referralData.findIndex((i) => i._id === id);

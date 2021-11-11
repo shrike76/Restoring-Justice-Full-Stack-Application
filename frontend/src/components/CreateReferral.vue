@@ -72,7 +72,7 @@
           <b-form-textarea
             id="textarea"
             v-model="data.Notes"
-            placeholder="Enter something..."
+            placeholder=""
             rows="3"
             max-rows="6"
           ></b-form-textarea>
