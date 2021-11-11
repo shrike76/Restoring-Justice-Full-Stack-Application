@@ -1,35 +1,9 @@
 <template>
-  <div class="hello">
-    <h1>Welcome to Restoring Justice</h1>
-
-    <b-alert show>Please use the menu on the Top to Navigate</b-alert>
-    
+  <div>
+    <b-img
+      src="https://images.squarespace-cdn.com/content/v1/57f596ca197aea51f40ccbf5/1591224143251-ZY81A3Y6LHPW55TUZOJU/RJ-Logo-Full-Color.png?format=1500w"
+      fluid
+      alt="Responsive image"
+    ></b-img>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
