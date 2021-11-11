@@ -23,6 +23,11 @@
               >View referrals</router-link
             >
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/chart"
+              >View Charts</router-link
+            >
+          </li>
         </ul>
       </div>
     </nav>
