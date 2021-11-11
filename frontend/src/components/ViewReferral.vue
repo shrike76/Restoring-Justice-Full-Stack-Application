@@ -90,7 +90,7 @@
             class="pt-2"
             :options="['Yes', 'No']"
             :aria-describedby="ariaDescribedby"
-            v-model="computedResult"
+            v-model="clientData.UsedReferral"
           ></b-form-radio-group>
         </b-form-group>
 
@@ -142,32 +142,40 @@ export default {
         "Drug Testing",
         "Other",
       ],
+      converted: "",
     };
   },
 
   created() {
     let apiURL = `http://localhost:3000/referrals/${this.currentData}`;
 
-    axios.get(apiURL).then((res) => (this.clientData = res.data));
+    axios
+      .get(apiURL)
+      .then((res) => (this.clientData = res.data))
+      .then(this.convertData);
   },
   methods: {
     handleSubmit() {
-      // console.log(this.computedResult);
-
       let apiURL = `http://localhost:3000/referrals/${this.clientData._id}`;
+
+      if (this.clientData.UsedReferral == "Yes") {
+        this.clientData.UsedReferral = true;
+      } else {
+        this.clientData.UsedReferral = false;
+      }
 
       axios.put(apiURL, this.clientData).then((res) => {
         console.log(res);
+        // this.$router.push("/");
         alert(res.data);
       });
     },
-  },
-  computed: {
-    computedResult: function() {
+
+    convertData() {
       if (this.clientData.UsedReferral == true) {
-        return "Yes";
+        this.clientData.UsedReferral = "Yes";
       } else {
-        return "No";
+        this.clientData.UsedReferral = "No";
       }
     },
   },

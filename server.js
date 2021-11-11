@@ -138,14 +138,21 @@ app.get("/clientslatest/", (req, res, next) => {
 });
 
 //GET/view all previous versions of an _id
-app.get('/clientsprevious/:id', (req, res, next) => {
-  IntakeForm.find({IntakeFormID: req.params.id, IsActive: true, IntakeFormNext: {$size: 1}},(error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.json(data);
+app.get("/clientsprevious/:id", (req, res, next) => {
+  IntakeForm.find(
+    {
+      IntakeFormID: req.params.id,
+      IsActive: true,
+      IntakeFormNext: { $size: 1 },
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
     }
-})
+  );
 });
 
 //PUT (functional delete)
