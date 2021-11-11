@@ -71,6 +71,7 @@ export default {
     let apiURL = "http://localhost:3000/referrals";
 
     axios.get(apiURL).then((res) => (this.referralData = res.data));
+    // axios.get(apiURL).then((res) => console.log(res.data));
   },
 };
 </script>

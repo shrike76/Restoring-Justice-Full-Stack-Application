@@ -60,7 +60,12 @@ const routes = [
   {
     path: "/chart",
     name: "chart",
-    component: () => import('../views/VueChartJS.vue')
+    component: () => import("../views/VueChartJS.vue"),
+  },
+  {
+    path: "/summary",
+    name: "SummaryReport",
+    component: () => import("../components/SummaryReport.vue"),
   },
 ];
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Nav bar -->
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand float-left " href="/">Restoring Justice</a>
         <ul class="nav navbar-nav mr-auto">
@@ -24,8 +24,11 @@
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/chart"
-              >View Charts</router-link
+            <router-link class="nav-link" to="/chart">View Charts</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/summary"
+              >Summary Report</router-link
             >
           </li>
         </ul>
