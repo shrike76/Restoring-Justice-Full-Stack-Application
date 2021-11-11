@@ -234,6 +234,33 @@ app.delete("/referrals/:id", (req, res, next) => {
   });
 });
 
+app.get("/chart", (req, res, next) => {
+  IntakeForm.aggregate([
+  {
+    '$match': {
+      'IsActive': true, 
+      'IntakeFormNext': {
+        '$size': 0
+      }
+    }
+  }, {
+    '$group': {
+      '_id': '$MaritalStatus', 
+      'count': {
+        '$sum': 1
+      }
+    }
+  }
+  ], (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.json(data);
+      }
+  });
+});
+
+
 //error handler
 app.use(function (err, req, res, next) {
   console.error(err.message);

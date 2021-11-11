@@ -57,6 +57,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import("../components/ReferralList.vue"),
   },
+  {
+    path: "/chart",
+    name: "chart",
+    component: () => import('../views/VueChartJS.vue')
+  },
 ];
 
 // Create the router instance and pass the `routes` option
