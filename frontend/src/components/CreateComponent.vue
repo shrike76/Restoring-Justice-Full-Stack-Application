@@ -872,10 +872,10 @@
                 isVisible: false,
                 //need all schema inputs to be added to this list
                 intakeForm: {
-                   CaseNum: '22',
-                   ClientNum: '22',
-                   StartDate: '11/11/1111',
-                   CloseDate: '11/11/1112',
+                   CaseNum: '',
+                   ClientNum: '',
+                   StartDate: '',
+                   CloseDate: '',
                    IsUSCitizen: '',
                    MaritalStatus: ''
                 },
@@ -920,15 +920,6 @@
                 let apiURL = 'http://localhost:3000/clients';
                 delete this.intakeForm._id; //removes json element https://stackoverflow.com/questions/5310304/remove-json-element/39753601
                 axios.post(apiURL, this.intakeForm).then(() => {
-                    //console.log('success')
-                    //chnaging the view to the list
-                  //this.$router.push('/view')
-                  /*this.intakeForm = {
-                    CaseNum: '',
-                    ClientNum: '',
-                    StartDate: '',
-                    CloseDate: ''
-                  }*/
                 }).catch(error => {
                     console.log(error)
                 });
@@ -943,9 +934,6 @@
                     console.log(error.response)
                     })
             },
-            // versionDropdown(isVisible) {
-            //         this.isVisible = isVisible
-            //     }
             } 
     }
 </script>

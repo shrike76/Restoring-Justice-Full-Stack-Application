@@ -12,7 +12,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 let IntakeForm = require("./intakeform.js");
 let Referrals = require("./referrals.js");
 
@@ -111,7 +110,6 @@ app.get("/clientsbyformid/:id", (req, res, next) => {
   });
 });
 
-//
 //GET /view find by IntakeForm object id
 app.get("/clients/:id", (req, res, next) => {
   IntakeForm.findById(req.params.id, (error, data) => {
@@ -260,47 +258,9 @@ app.get("/chart", (req, res, next) => {
   });
 });
 
-
 //error handler
 app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
-
-//old get latest code, might need later
-/*app.get('/clientslatest/', (req, res, next) => {
-
-  //uses an aggregate function to get latest versions of each document. https://stackoverflow.com/questions/56083428/mongodb-get-all-entries-with-most-recent-revision
-  IntakeForm.aggregate([
-    //gets latest IntakeFormVersion for each IntakeFormID
-    { $group : { _id: '$IntakeFormID','maxRevision':{'$max': '$IntakeFormVersion' }, "originalDocuments": { "$push": "$$ROOT" }}},
-    {
-      //gets entire document based on group by made above
-      $project: {
-        "originalDocument": {
-          "$filter": {
-            "input": "$originalDocuments",
-            "as": "doc",
-            "cond": {
-              "$and": [
-                { "$eq": ["$maxRevision", "$$doc.IntakeFormVersion"] }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      //https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
-      "$unwind": "$originalDocument"
-    }
-  ], (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data);
-      }
-  });
-});
-*/

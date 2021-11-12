@@ -162,7 +162,7 @@ export default {
         this.data.UsedReferral = false;
       }
 
-      let apiURL = "http://localhost:3000/referrals";
+      let apiURL = "http://rjustice.azurewebsites.net/referrals";
       axios
         .post(apiURL, this.data)
         .then((res) => {

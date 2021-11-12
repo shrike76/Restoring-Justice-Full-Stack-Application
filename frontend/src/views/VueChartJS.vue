@@ -1,11 +1,7 @@
 <template>
-
-
 <!--pie chart from https://chartkick.com/vue-->
 <pie-chart :data="chartData">
 </pie-chart>
-
-
 </template>
 
 <script>
@@ -16,7 +12,7 @@
                 chartData: []
             }},
                 created() {
-                let apiURL = 'http://localhost:3000/chart';
+                let apiURL = 'http://rjustice.azurewebsites.net/chart';
                 axios.get(apiURL).then(res => {
                     var input = res.data;
                     var result = [];
