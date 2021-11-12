@@ -1,16 +1,14 @@
 project-cis_4339_project_10 created by GitHub Classroom
 Option C: Restoring Justice
 
-Sprint 1
-
 Must create a .env file with the following code:
-MONGO_URL = mongodb://localhost:27017/ClientRecords
+MONGO_URL = mongodb+srv://jock:maddock@group10.bt46z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 In the command line of the project folder type the following:
 npm install
-npm start
 
+navigate to the frontend folder using cd and type the following:
+npm install
 
-It may appear from the commits that Colton has committed the most. 
-This may be scewed due to us combining the individual schemas from the other branches into one schema and Colton pushing it. 
-We also collaberated in real time on much of the code and Colton was the one who committed it. 
+navigate back to the main directory folder (project-cis_4339_project_10) and type the following: 
+npm run dev
