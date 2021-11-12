@@ -148,7 +148,7 @@ export default {
   },
 
   created() {
-    let apiURL = `http://rjustice.azurewebsites.net/referrals/${this.currentData}`;
+    let apiURL = `http://localhost:3000/referrals/${this.currentData}`;
     //gets the data from backend and places it inside clientData
     axios
       .get(apiURL)
@@ -158,7 +158,7 @@ export default {
   methods: {
     //handles the update for a referral
     handleSubmit() {
-      let apiURL = `http://rjustice.azurewebsites.net/referrals/${this.clientData._id}`;
+      let apiURL = `http://localhost:3000/referrals/${this.clientData._id}`;
 
       //converts from string to boolean for backend storage purposes
       if (this.clientData.UsedReferral == "Yes") {

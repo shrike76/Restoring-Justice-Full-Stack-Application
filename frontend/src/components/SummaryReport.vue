@@ -27,7 +27,7 @@ export default {
     };
   },
   created() {
-    let apiURL = "http://rjustice.azurewebsites.net/referrals";
+    let apiURL = "http://localhost:3000/referrals";
     //getting the referral data from backened
     axios
       .get(apiURL)

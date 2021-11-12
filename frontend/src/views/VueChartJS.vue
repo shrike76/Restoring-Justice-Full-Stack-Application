@@ -12,7 +12,7 @@
                 chartData: []
             }},
                 created() {
-                let apiURL = 'http://rjustice.azurewebsites.net/chart';
+                let apiURL = 'http://localhost:3000/chart';
                 axios.get(apiURL).then(res => {
                     var input = res.data;
                     var result = [];

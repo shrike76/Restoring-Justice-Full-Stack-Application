@@ -53,7 +53,7 @@ export default {
   methods: {
     //handles the delete function as well as rerenders component
     handleDelete(id) {
-      let apiURL = `http://rjustice.azurewebsites.net/referrals/${id}`;
+      let apiURL = `http://localhost:3000/referrals/${id}`;
       let indexOfArrayItem = this.referralData.findIndex((i) => i._id === id);
 
       axios.delete(apiURL).then((response) => {
@@ -68,7 +68,7 @@ export default {
     },
   },
   created() {
-    let apiURL = "http://rjustice.azurewebsites.net/referrals";
+    let apiURL = "http://localhost:3000/referrals";
 
     axios.get(apiURL).then((res) => (this.referralData = res.data));
     // axios.get(apiURL).then((res) => console.log(res.data));

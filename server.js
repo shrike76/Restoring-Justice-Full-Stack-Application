@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: "http://rjustice.azurewebsites.net",
+  origin: "http://localhost:8080",
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -16,7 +16,7 @@ let IntakeForm = require("./intakeform.js");
 let Referrals = require("./referrals.js");
 
 mongoose
-  .connect(process.env.MONGO_URL) // read environment varibale from .env
+  .connect(process.env.MONGO_URL)//Uses Atlas for cloud database. reads environment varibale from .env
   .then(() => {
     console.log("Database connection Success!");
   })

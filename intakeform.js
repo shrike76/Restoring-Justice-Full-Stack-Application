@@ -60,17 +60,14 @@ let IntakeForm = new mongoose.Schema({
         type: Date,
         get: FormatDate
     },
-    //regrex from https://www.geeksforgeeks.org/how-to-validate-ssn-social-security-number-using-regular-expression/
     SocialSecurity: {
-        type: Number,
-        match: [/^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$/]  
+        type: Number, 
     },
     IsUSCitizen: {
         type: Boolean
     },
     Gender: {
         type: String,
-        enum: ['Male','Female']
     },
     TXIDNum: {
         type: Number
@@ -91,36 +88,26 @@ let IntakeForm = new mongoose.Schema({
     County: {
         type: String  
     },
-    //store back end in inches, convert to feet and inches on front end
     Height: {
         type: Number,
-        min: [0]
     },
     Weight: {
         type: Number,
-        min: [0]
     },
     IsInCustody: {
         type: Boolean
     },
     CustodyLocation: {
         type: String,
-        required: function() {
-            IsInCustody = true;
-        }
     },
     IsAdelphoi: {
         type: Boolean
     },
     AdelphoiName: {
         type: String,
-        required: function() {
-            IsAdelphoi = true;
-        }
     },
     TotalRent: {
         type: mongoose.Schema.Types.Decimal128,
-        min: [0.0]
     },
     IsUtilitiesIncluded: {
         type: Boolean
@@ -132,37 +119,27 @@ let IntakeForm = new mongoose.Schema({
         type: Boolean
     },
     //Contact Information
-    //regrex from https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number
     HomePhone: {
         type: String,
-        match: [/^[1-9]\d{2}-\d{3}-\d{4}/]
     },
     WorkPhone: {
         type: Number,
-        match: [/^[1-9]\d{2}-\d{3}-\d{4}/]
     },
     CellPhone: {
         type: Number,
-        match: [/^[1-9]\d{2}-\d{3}-\d{4}/]
     },
     OtherPhone: {
         type: Number,
-        match: [/^[1-9]\d{2}-\d{3}-\d{4}/]
     },
-    //regrex from https://www.codegrepper.com/code-examples/whatever/mongoose+validate+match+regex
     PersonalEmail: {
         type: String,  
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
     },
     OtherEmail: {
         type: String,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
     },
     MaritalStatus: {
         type: String,
-        enum: ['Single','Married','Seperated','Divorced','Widow','CommonLaw']
     },
-    //will validate on front end
     Language: [String],
     Ethnicity: {
         type: String
@@ -173,16 +150,12 @@ let IntakeForm = new mongoose.Schema({
     },
     HowLongE:{
         type: String,
-        required: function() {
-            Employed = true}
     },
     IsUnemployed: {
         type: Boolean
     },
     HowLongU:{
         type: String,
-        required: function() {
-            Unemployed = true}
     },
     Employer: {
         type: String
@@ -195,8 +168,6 @@ let IntakeForm = new mongoose.Schema({
     },
     HowLongR:{
         type: String,
-        required: function() {
-            Retired = true}
     },
     IsHouseWife: {
         type: Boolean
@@ -207,17 +178,12 @@ let IntakeForm = new mongoose.Schema({
     },
     School:{
         type: String,
-        required: function() {
-            attendedSchool = true}
     },
     LastGrade: {
         type: String,
-        required: function() {
-            attendedSchool = true}
     },
     Graduated: {
         type: String,
-        enum: ['Elementary,','HighSchool','AttendCollege','TechnicalSchool','AssociateDegree','BachelorDegree','MasterDegree','PHD']
     },
     Graduated1: {
         type: Boolean
@@ -268,29 +234,21 @@ let IntakeForm = new mongoose.Schema({
     },
     HealthInsuranceType: {
         type: String,
-        enum: ['Private Insurance', 'Medicaid', 'Medicare', 'Chip', 'Gold Card', 'WIC']
     },
     IsFoodStamps: {
         type: Boolean
     },
     Amount: {
         type: mongoose.Schema.Types.Decimal128,
-        required: function () {
-            IsFoodStamps = true;
-        }
     },
     Reason: {
         type: String,
-        enum: ['Do not qualify', 'Have not applied', 'Application in process', 'Need help applying']
     },
     IsDrugsOrAlcohol: {
         type: Boolean
     },
     HowMuch: {
         type: String,
-        required: function () {
-            IsDrugsOrAlcohol = true;
-        }
     },
     IsTreatment: {
         type: Boolean
@@ -318,13 +276,16 @@ let IntakeForm = new mongoose.Schema({
     PriorAttorneyCaseLoad: {
         type: String
     },
-    Convictions: [{
-        charge: String,
-        degree: String,
-        punishmentRange: String,
-        disposition: String
-    }],
-    CurrentCourt: {
+    Charge: {
+        type: String
+    },
+    Degree: {
+        type: String
+    },
+    PunishmenRange: {
+        type: String
+    },
+    Disposition: {
         type: String
     },
     CourtAddress: {

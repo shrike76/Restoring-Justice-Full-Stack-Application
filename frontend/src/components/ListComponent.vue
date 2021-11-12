@@ -44,7 +44,7 @@
         },
         // this is using created hook 
         created() {
-            let apiURL = 'http://rjustice.azurewebsites.net/clientslatest';
+            let apiURL = 'http://localhost:3000/clientslatest';
             axios.get(apiURL).then(res => {
                 this.Intake = res.data;
             }).catch(error => {
@@ -55,7 +55,7 @@
             //code taken from https://forum.vuejs.org/t/how-to-populate-form-depend-on-the-dropdown-selection/47373
             //views the record when button is pressed
             viewRecord: function (id) {
-                let apiURL = 'http://rjustice.azurewebsites.net/clients/' + id;
+                let apiURL = 'http://localhost:3000/clients/' + id;
                 this.$axios.$get(apiURL).then((response) => {
                     this.intake._id = response.data;  
                     })
@@ -65,7 +65,7 @@
             },
             //functionally deletes the record when button is pressed
             deleteRecord: function(id) {
-                let apiURL = 'http://rjustice.azurewebsites.net/clients/' + id;
+                let apiURL = 'http://localhost:3000/clients/' + id;
                 axios.put(apiURL).then(() => {
                 location.reload(); //reloads the page when button is pressed
                 })

@@ -50,7 +50,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Middle Name:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.MiddleName" required>
+                    <input type="text" class="form-control" v-model="intakeForm.MiddleName">
                 </div>
             </div>
             <div class="col-md-3">
@@ -732,13 +732,13 @@
             <div class="col-md-2" v-show="intakeForm.CaseNo">
                 <div class="form-group">
                     <label>Charge:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <input type="text" class="form-control" v-model="intakeForm.Charge">
                     <label>Degree:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <input type="text" class="form-control" v-model="intakeForm.Degree">
                     <label>Punishment Range:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <input type="text" class="form-control" v-model="intakeForm.PunishmentRange">
                     <label>Disposition:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
+                    <input type="text" class="form-control" v-model="intakeForm.Disposition">
                 </div>
             </div>
             <br>
