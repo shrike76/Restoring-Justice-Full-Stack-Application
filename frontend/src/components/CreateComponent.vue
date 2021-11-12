@@ -731,66 +731,14 @@
         
             <div class="col-md-2" v-show="intakeForm.CaseNo">
                 <div class="form-group">
-                    <label>Charge 1:</label>
+                    <label>Charge:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Degree 1:</label>
+                    <label>Degree:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Punishment Range 1:</label>
+                    <label>Punishment Range:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Disposition 1:</label>
+                    <label>Disposition:</label>
                     <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                </div>
-            </div>
-            <br>
-            <div class="col-md-2" v-show="intakeForm.CaseNo">
-                <div class="form-group">
-                    <label>Charge 2:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Degree 2:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Punishment Range 2:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Disposition 2:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                </div>
-            </div>
-
-            <div class="col-md-2" v-show="intakeForm.CaseNo">
-                <div class="form-group">
-                    <label>Charge 3:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Degree 3:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Punishment Range 3:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Disposition 3:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                </div>
-            </div>
-
-            <div class="col-md-2" v-show="intakeForm.CaseNo">
-                <div class="form-group">
-                    <label>Charge 4:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Degree 4:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Punishment Range 4:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Disposition 4:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                </div>
-            </div>
-
-            <div class="col-md-2" v-show="intakeForm.CaseNo">
-                <div class="form-group">
-                    <label>Charge 5:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Degree 5:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Punishment Range 5:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions">
-                    <label>Disposition 5:</label>
-                    <input type="text" class="form-control" v-model="intakeForm.Convictions"><br><br>
                 </div>
             </div>
             <br>
